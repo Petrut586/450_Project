@@ -24,7 +24,7 @@ def survey():
 @auth.route('/question', methods=['GET','POST'])
 def question():
     if request.method == 'POST':
-        id = request.form['id']
+        # id = request.form['id']
         gender = request.form.get('gender')
         golf_Course = request.form.get('selection')
         
