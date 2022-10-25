@@ -48,6 +48,7 @@ def signup():
         first_Name = request.form.get('firstName')
         password1 = request.form.get('password1')
         password2 = request.form.get('password2')
+        golfCourse = request.form.get('selection')
 
         if len(email) < 4:
             flash('Email must be greater than 3 characters', category='error')
@@ -58,7 +59,7 @@ def signup():
         elif len(password1) < 7:
             flash('Password must be greater than 7 characters', category='error')
         else:
-            new_manager = Manager(email=email, first_Name=first_Name, password=generate_password_hash(password1, method='sha256'))
+            new_manager = Manager(email=email, first_Name=first_Name, password=generate_password_hash(password1, method='sha256'), golf_Course=golfCourse)
             db.session.add(new_manager)
             db.session.commit()
             flash('Account created!', category='success')

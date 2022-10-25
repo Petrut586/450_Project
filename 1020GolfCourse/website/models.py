@@ -7,7 +7,7 @@ class Manager(db.Model):
     first_Name = db.Column(db.String(150))
     email = db.Column(db.String(150), unique=True)
     password = db.Column(db.String(150))
-    # golf_Course = db.Column(db.String(50))
+    golf_Course = db.Column(db.String(50))
 
 class Review(db.Model):
     id = db.Column(db.Integer, primary_key=True)
