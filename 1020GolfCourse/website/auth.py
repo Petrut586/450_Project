@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
 from .models import User, Review
-from . import db 
+from . import db
 auth = Blueprint('auth', __name__)
 
 @auth.route('/survey', methods=['GET','POST'])
@@ -8,9 +8,7 @@ def survey():
     if request.method == 'POST':
         email = request.form.get('email')
         first_Name = request.form.get('first_Name')
-        # date = request.form.get('date')
         new_user = User(email=email, first_Name=first_Name)
-        # review_Date = Review(date = date)
         db.session.add(new_user)
         db.session.commit()
         
@@ -21,17 +19,26 @@ def survey():
 @auth.route('/question', methods=['GET','POST'])
 def question():
     if request.method == 'POST':
-        id = request.form['id']
+        # user_id = User.query.get()
+        
+        date = request.form.get('date')
         gender = request.form.get('gender')
         golf_Course = request.form.get('selection')
+        golf_Rating = request.form.get('golf_rating')
+        visit = request.form.get('visit')
+        golf_ball = request.form.get('Gball')
+        club = request.form.get('club')
+        review_Rate = request.form.get('review_rating')
+        add_Feedback = request.form.get('comment')
         
-        new_review = Review(gender=gender, golf_Course=golf_Course)
+        new_Review = Review(add_Feedback=add_Feedback, date=date, gender=gender, golf_Course=golf_Course, rating=golf_Rating, visits=visit, type_Golfball=golf_ball, club_Brand=club, review_Rate=review_Rate)
+       
         
-        db.session.add(new_review)
+        db.session.add(new_Review)
         db.session.commit()
         
         flash('Review was Successfully Submited')
-        return redirect(url_for('views.home'))
+        return redirect(url_for('views.ty'))
     return render_template("questions.html")    
 
 @auth.route('/home')

@@ -81,7 +81,16 @@
     <h1>Golf Course Review Questions</h1>
 
     <!--Create Form-->
-    <form id="form">
+    <form method="POST">
+        <div class="form-control">
+            <label for="date">Date Played at Course </label>
+
+            <input type="date" id="date" name="date"
+                value=""
+                min="2022-01-01" max="2022-12-31"></input>
+        </div>
+        <br>
+        <br>
 
         <div class="form-control">
             <label>
@@ -91,14 +100,15 @@
             <!-- Input Type Radio Buttons -->
             <label for="gender">
                 <input type="radio"
-                id="gender"
-                name="Female">Female</input>
-            </label>
+                    id="gender"
+                    name="gender"
+                    value ="Female">Female</input>
+                <br>
 
-            <label for="gender">
                 <input type="radio"
-                id="gender"
-                name="Male">Male</input>
+                    id="gender"
+                    name="gender"
+                    value="Male">Male</input>
             </label>
         </div>
         <br>
@@ -121,10 +131,10 @@
         <div class="form-control">
             <label for="rating" id="label-rating">
                 Please rate the golf course
-            </label> 
+            </label>
 
             <!-- Dropdown options -->
-            <select name="rating" id="rating">
+            <select name="golf_rating" id="golf_rating">
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -149,30 +159,35 @@
             <label for="visits">
                 <input type="radio"
                     id="visits"
-                    name="visit">1-5 times</input>
+                    name="visit"
+                    value="1-5">1-5 times</input>
             </label>
 
             <label for="visits">
                 <input type="radio"
                     id="visits"
-                    name="visit">5-10 times</input>
+                    name="visit"
+                    value="5-10">5-10 times</input>
             </label>
 
             <label for="visits">
                 <input type="radio"
                     id="visits"
-                    name="visit">11-15 times</input>
+                    name="visit"
+                    value="11-15">11-15 times</input>
             </label>
             <label for="visits">
                 <input type="radio"
                     id="visits"
-                    name="visit">16-20 times</input>
+                    name="visit"
+                    value="16-20">16-20 times</input>
             </label>
 
             <label for="visits">
                 <input type="radio"
                     id="visits"
-                    name="visit">21 times or more</input>
+                    name="visit"
+                    value="21-more">21 times or more</input>
             </label>
         </div>
         <br>
@@ -192,19 +207,22 @@
             <label for="Gball">
                 <input type="radio"
                     id="Gball"
-                    name="Gball">Always use new</input>
+                    name="Gball"
+                    value="Always use new">Always use new</input>
             </label>
 
             <label for="Gball">
                 <input type="radio"
                     id="Gball"
-                    name="Gball">Combination of New and Used</input>
+                    name="Gball"
+                    value="Combination of New and Used">Combination of New and Used</input>
             </label>
 
             <label for="Gball">
                 <input type="radio"
                     id="Gball"
-                    name="Gball">Mostly Used balls</input>
+                    name="Gball"
+                    value="Mostly Used balls">Mostly Used balls</input>
             </label>
         </div>
         <br>
@@ -221,49 +239,57 @@
             <label for="club">
                 <input type="radio"
                     id="club"
-                    name="club">Nike</input>
+                    name="club"
+                    value="Nike">Nike</input>
             </label>
 
             <label for="club">
                 <input type="radio"
                     id="club"
-                    name="club">Titleist</input>
+                    name="club"
+                    value="Titleist">Titleist</input>
            </label>
 
            <label for="club">
                 <input type="radio"
                     id="club"
-                    name="club">Callaway</input>
+                    name="club"
+                    value="Callaway">Callaway</input>
            </label>
 
            <label for="club">
                 <input type="radio"
                     id="club"
-                    name="club">Ping</input>
+                    name="club"
+                    value="Ping">Ping</input>
            </label>
 
            <label for="club">
                 <input type="radio"
                     id="club"
-                    name="club">Taylormade</input>
+                    name="club"
+                    value="Taylormade">Taylormade</input>
            </label>
 
            <label for="club">
                 <input type="radio"
                     id="club"
-                    name="club">Mix and match</input>
+                    name="club"
+                    value="Mix and Match">Mix and Match</input>
            </label>
 
            <label for="club">
                 <input type="radio"
                     id="club"
-                    name="club">Low end brand</input>
+                    name="club"
+                    value="Low end brand">Low end brand</input>
            </label>
 
            <label for="club">
                 <input type="radio"
                     id="club"
-                    name="club">Other</input>
+                    name="club"
+                    value="Other">Other</input>
            </label>
         </div>
         <br>
@@ -281,10 +307,10 @@
         <div class="form-control">
             <label for="rating" id="label-rating">
                 Please rate your review experience 
-            </label> 
+            </label>
 
             <!-- Dropdown options -->
-            <select name="rating" id="rating">
+            <select name="review_rating" id="review_rating">
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -299,22 +325,19 @@
         </div>
         <br>
         <br>
-
         <div class="form-control">
             <label for="comment">
                 Any additional feedback
-            </label>
+            </label> 
 
             <!-- multi-line text input control -->
             <textarea name="comment" id="comment"
-                placeholder="Enter your comment here">
-            </textarea>
+                placeholder="Enter your comment here"
+                value=""></textarea>
         </div>
         <br>
-        <!-- Multi-line Text Input Control -->
-        <button type="Submit" value="sumbit">
-            Submit
-        </button>
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary"> Submit </button></p>
     </form>
 </body>
 </html>

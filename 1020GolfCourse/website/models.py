@@ -8,12 +8,14 @@ class Manager(db.Model):
     email = db.Column(db.String(150), unique=True)
     password = db.Column(db.String(150))
     golf_Course = db.Column(db.String(50))
+    
+    def __repr__(self):
+        return f"Manager('{self.first_Name}', '{self.email}', '{self.password}', '{self.golf_Course}')"
 
 class Review(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    add_Feedback = db.Column(db.String(10000))
-    date = db.Column(db.String(30))
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    date = db.Column(db.String(50))
+    # user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     gender = db.Column(db.String(20))
     golf_Course = db.Column(db.String(50), db.ForeignKey('manager.golf_Course'))
     rating = db.Column(db.Integer)
@@ -21,11 +23,18 @@ class Review(db.Model):
     type_Golfball = db.Column(db.String(50))
     club_Brand = db.Column(db.String(50))
     review_Rate = db.Column(db.Integer)
+    add_Feedback = db.Column(db.String(10000))
+    
+    def __repr__(self):
+        return f"Review('{self.add_Feedback}', '{self.date}', '{self.gender}', '{self.rating}', '{self.visits}', '{self.type_Golfball}', '{self.club_Brand}', '{self.review_Rate}')"
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(150), unique=True)
     first_Name = db.Column(db.String(150))
+    
+    def __repr__(self):
+        return f"User('{self.id}', '{self.first_Name}', '{self.email}')"
     
    
 
