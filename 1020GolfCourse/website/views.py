@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template
 
+
 views = Blueprint('views', __name__)
 
 
@@ -26,3 +27,7 @@ def ty():
 @views.route('/question')
 def question():
     return render_template("questions.html")
+
+@views.route('/DBView')
+def dbview():
+    return render_template("DBView.php")

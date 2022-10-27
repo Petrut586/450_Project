@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, request, flash, redirect, url_for
 from .models import User, Review, Manager
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import db 
-# from flask_login import login_user, login_required, logout_user, current_user
+from flask_login import login_user, login_required, logout_user, current_user
 
 auth = Blueprint('auth', __name__)
 
@@ -61,7 +61,10 @@ def signup():
         password2 = request.form.get('password2')
         golfCourse = request.form.get('selection')
 
-        if len(email) < 4:
+        manager = Manager.query.filter_by(email=email).first()
+        if manager:
+            flash('Email already exists', category='error')
+        elif len(email) < 4:
             flash('Email must be greater than 3 characters', category='error')
         elif len(first_Name) < 2:
             flash('Name must be longer than 1 character', category='error')
@@ -74,13 +77,26 @@ def signup():
             db.session.add(new_manager)
             db.session.commit()
             flash('Account created!', category='success')
-            return redirect(url_for('views.home'))
+            return redirect(url_for('views.login'))
 
     return render_template("management.html")
 
 @auth.route('/managementlogin', methods=['GET','POST'])
 def login():
-    data = request.form
-    return render_template("managementLogin.html")
+    if request.method == 'POST':
+        email = request.form.get('email') 
+        password = request.form.get('password')
+
+        manager = Manager.query.filter_by(email=email).first()
+        if manager:
+            if check_password_hash(manager.password, password):
+                flash('Logged in successfully', category='success')
+                login_user(manager, remember=True)
+            else:
+                flash('Incorrect password.', category='error')
+        else:
+            flash('Email does not exist', category='error')
+    
+    return render_template("DBView.php")
 
 
