@@ -14,19 +14,27 @@ def survey():
         email = request.form.get('email')
         first_Name = request.form.get('first_Name')
         
-        # creating a query to input the info into the database
-        new_user = User(email=email, first_Name=first_Name)
-        
-        # creating a session so the info can be accessed in other pages
-        session['User_email'] = email
-        
-        # quering the database and adding the info
-        db.session.add(new_user)
-        db.session.commit()
+        exsiting_Email = User.query.filter_by(email=email).first()
+        if exsiting_Email:
+            
+            # creating a session so the info can be accessed in other pages
+            session['User_email'] = email
+            
+            return redirect(url_for('views.question'))
+        elif len(email) < 4:
+            flash('Email must be greater than 3 characters', category='error')
+        else:
+            # creating a query to input the info into the database
+            new_user = User(email=email, first_Name=first_Name)
+            
+            # quering the database and adding the info
+            db.session.add(new_user)
+            db.session.commit()
         
         # directing the user to the questions.html if the info as been added correctly
         return redirect(url_for('views.question'))
 
+    # directs the user to the same page if the request.method has an error
     return render_template("user.html")
     
 @auth.route('/question', methods=['GET','POST'])
@@ -60,6 +68,7 @@ def question():
             
             # redirecting the user to a thank you page 
             return redirect(url_for('views.ty'))
+        return render_template("questions.html")
     return render_template("questions.html")    
 
 @auth.route('/home')
@@ -105,12 +114,11 @@ def login():
         if manager:
             if check_password_hash(manager.password, password):
                 flash('Logged in successfully', category='success')
-                login_user(manager, remember=True)
+                return redirect(url_for('views.owner'))
             else:
-                flash('Incorrect password.', category='error')
+                flash('Incorrect password', category='error')
         else:
             flash('Email does not exist', category='error')
-    
-    return render_template("home.html")
+    return render_template("managementLogin.html")
 
 
