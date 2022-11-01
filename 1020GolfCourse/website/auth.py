@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, flash, redirect, url_for
+from flask import Blueprint, render_template, request, flash, redirect, url_for, session
 from .models import User, Review, Manager
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import db 
@@ -9,14 +9,22 @@ auth = Blueprint('auth', __name__)
 @auth.route('/survey', methods=['GET','POST'])
 def survey():
     if request.method == 'POST':
+        
+        # requesting info from the user.html
         email = request.form.get('email')
         first_Name = request.form.get('first_Name')
-        # date = request.form.get('date')
+        
+        # creating a query to input the info into the database
         new_user = User(email=email, first_Name=first_Name)
-        # review_Date = Review(date = date)
+        
+        # creating a session so the info can be accessed in other pages
+        session['User_email'] = email
+        
+        # quering the database and adding the info
         db.session.add(new_user)
         db.session.commit()
         
+        # directing the user to the questions.html if the info as been added correctly
         return redirect(url_for('views.question'))
 
     return render_template("user.html")
@@ -24,28 +32,34 @@ def survey():
 @auth.route('/question', methods=['GET','POST'])
 def question():
     if request.method == 'POST':
-        # id = request.form['id']
-        # user_id = User.query.get()
-        
-        date = request.form.get('date')
-        gender = request.form.get('gender')
-        golf_Course = request.form.get('selection')
-        golf_Rating = request.form.get('golf_rating')
-        visit = request.form.get('visit')
-        golf_ball = request.form.get('Gball')
-        club = request.form.get('club')
-        review_Rate = request.form.get('review_rating')
-        add_Feedback = request.form.get('comment')
-        
-        new_review = Review(gender=gender, golf_Course=golf_Course)
-        new_Review = Review(add_Feedback=add_Feedback, date=date, gender=gender, golf_Course=golf_Course, rating=golf_Rating, visits=visit, type_Golfball=golf_ball, club_Brand=club, review_Rate=review_Rate)
-        
-        db.session.add(new_review)
-        
-        db.session.commit()
-        
-        flash('Review was Successfully Submited')
-        return redirect(url_for('views.ty'))
+        if 'User_email' in session:
+            
+            # info requested from questions.html
+            date = request.form.get('date')
+            gender = request.form.get('gender')
+            golf_Course = request.form.get('selection')
+            golf_Rating = request.form.get('golf_rating')
+            visit = request.form.get('visit')
+            golf_ball = request.form.get('Gball')
+            club = request.form.get('club')
+            review_Rate = request.form.get('review_rating')
+            add_Feedback = request.form.get('comment')
+            
+            # retreving the user info from previous page
+            user_Email = session['User_email']
+            
+            # Creating the query for the Review table
+            new_Review = Review(add_Feedback=add_Feedback, date=date, user_Email=user_Email, gender=gender, golf_Course=golf_Course, rating=golf_Rating, visits=visit, type_Golfball=golf_ball, club_Brand=club, review_Rate=review_Rate)
+            
+            # Adding query to the database
+            db.session.add(new_Review)
+            db.session.commit()
+            
+            # flashing a message that review was successfully submited
+            flash('Review was Successfully Submited')
+            
+            # redirecting the user to a thank you page 
+            return redirect(url_for('views.ty'))
     return render_template("questions.html")    
 
 @auth.route('/home')
@@ -97,6 +111,6 @@ def login():
         else:
             flash('Email does not exist', category='error')
     
-    return render_template("DBView.php")
+    return render_template("home.html")
 
 

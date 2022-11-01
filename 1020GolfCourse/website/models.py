@@ -13,7 +13,7 @@ class Review(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     add_Feedback = db.Column(db.String(10000))
     date = db.Column(db.String(30))
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user_Email = db.Column(db.Integer, db.ForeignKey('user.email'))
     gender = db.Column(db.String(20))
     golf_Course = db.Column(db.String(50), db.ForeignKey('manager.golf_Course'))
     rating = db.Column(db.Integer)
@@ -23,8 +23,7 @@ class Review(db.Model):
     review_Rate = db.Column(db.Integer)
 
 class User(db.Model, UserMixin):
-    id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(150), unique=True)
+    email = db.Column(db.String(150), unique=True, primary_key=True)
     first_Name = db.Column(db.String(150))
     
    
