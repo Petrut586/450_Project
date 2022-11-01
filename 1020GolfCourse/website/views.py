@@ -28,6 +28,7 @@ def ty():
 def question():
     return render_template("questions.html")
 
-@views.route('/DBView')
-def dbview():
-    return render_template("DBView.php")
+@views.route('/owner')
+def owner():
+    return render_template("owner.html")
+
