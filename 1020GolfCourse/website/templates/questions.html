@@ -87,7 +87,7 @@
 
             <input type="date" id="date" name="date"
                 value=""
-                min="2022-01-01" max="2022-12-31"></input>
+                min="20220101" max="20221231"></input>
         </div>
         <br>
         <br>
@@ -102,15 +102,23 @@
                 <input type="radio"
                     id="gender"
                     name="gender"
-                    value ="Female">Female</input>
+                    value ="Female"
+                    required> Female</input>
                 <br>
 
                 <input type="radio"
                     id="gender"
                     name="gender"
-                    value="Male">Male</input>
+                    value="Male"> Male</input>
+                <br>
+
+                <input type="radio"
+                    id="gender"
+                    name="gender"
+                    value="Other"> Other</input>
             </label>
         </div>
+        <br>
         <br>
         <br>
 
@@ -119,7 +127,8 @@
             Select golf course
             </label>
 
-            <select name="selection" id="selection">
+            <select name="golf_course" id="golf_course" required>
+                <option value="">Select a Golf Course</option>
                 <option value="Golf Course 1">Golf Course 1</option>
                 <option value="Golf Course 2">Golf Course 2</option>
                 <option value="Golf Course 3">Golf Course 3</option>
@@ -134,7 +143,8 @@
             </label>
 
             <!-- Dropdown options -->
-            <select name="golf_rating" id="golf_rating">
+            <select name="golf_rating" id="golf_rating" required>
+                <option value="">Please select a number</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -160,38 +170,34 @@
                 <input type="radio"
                     id="visits"
                     name="visit"
-                    value="1-5">1-5 times</input>
-            </label>
+                    value="1-5"
+                    required> 1-5 times</input>
+                <br>
 
-            <label for="visits">
                 <input type="radio"
                     id="visits"
                     name="visit"
-                    value="5-10">5-10 times</input>
-            </label>
+                    value="5-10"> 5-10 times</input>
+                <br>
 
-            <label for="visits">
                 <input type="radio"
                     id="visits"
                     name="visit"
-                    value="11-15">11-15 times</input>
-            </label>
-            <label for="visits">
-                <input type="radio"
-                    id="visits"
-                    name="visit"
-                    value="16-20">16-20 times</input>
-            </label>
+                    value="11-15"> 11-15 times</input>
+                <br>
 
-            <label for="visits">
                 <input type="radio"
                     id="visits"
                     name="visit"
-                    value="21-more">21 times or more</input>
+                    value="16-20"> 16-20 times</input>
+                <br>
+
+                <input type="radio"
+                    id="visits"
+                    name="visit"
+                    value="21-more"> 21 times or more</input>
             </label>
         </div>
-        <br>
-        <br>
         <br>
         <br>
         <br>
@@ -208,31 +214,29 @@
                 <input type="radio"
                     id="Gball"
                     name="Gball"
-                    value="Always use new">Always use new</input>
-            </label>
+                    value="Always use new"
+                    required> Always use new</input>
+                <br>
 
-            <label for="Gball">
                 <input type="radio"
                     id="Gball"
                     name="Gball"
-                    value="Combination of New and Used">Combination of New and Used</input>
-            </label>
+                    value="Combination of New and Used"> Combination of New and Used</input>
+                <br>
 
-            <label for="Gball">
                 <input type="radio"
                     id="Gball"
                     name="Gball"
-                    value="Mostly Used balls">Mostly Used balls</input>
+                    value="Mostly Used balls"> Mostly Used balls</input>
             </label>
         </div>
-        <br>
         <br>
         <br>
         <br>
 
         <div class="form-control">
             <label>
-                What brand of clubs do you have?
+                What brand of clubs do you use?
             </label>
 
             <!-- Input Type Radio Button -->
@@ -240,62 +244,46 @@
                 <input type="radio"
                     id="club"
                     name="club"
-                    value="Nike">Nike</input>
-            </label>
+                    value="Nike"
+                    required> Nike</input>
+                <br>
 
-            <label for="club">
                 <input type="radio"
                     id="club"
                     name="club"
-                    value="Titleist">Titleist</input>
-           </label>
+                    value="Titleist"> Titleist</input>
+                <br>
 
-           <label for="club">
                 <input type="radio"
                     id="club"
                     name="club"
-                    value="Callaway">Callaway</input>
-           </label>
+                    value="Callaway"> Callaway</input>
+                <br>
 
-           <label for="club">
                 <input type="radio"
                     id="club"
                     name="club"
-                    value="Ping">Ping</input>
-           </label>
+                    value="Ping"> Ping</input>
+                <br>
 
-           <label for="club">
                 <input type="radio"
                     id="club"
                     name="club"
-                    value="Taylormade">Taylormade</input>
-           </label>
+                    value="Taylormade"> Taylormade</input>
+                <br>
 
-           <label for="club">
                 <input type="radio"
                     id="club"
                     name="club"
-                    value="Mix and Match">Mix and Match</input>
-           </label>
+                    value="Mix and Match"> Mix and Match</input>
+                <br>
 
-           <label for="club">
                 <input type="radio"
                     id="club"
                     name="club"
-                    value="Low end brand">Low end brand</input>
-           </label>
-
-           <label for="club">
-                <input type="radio"
-                    id="club"
-                    name="club"
-                    value="Other">Other</input>
+                    value="Other"> Other</input>
            </label>
         </div>
-        <br>
-        <br>
-        <br>
-        <br>
         <br>
         <br>
         <br>
@@ -310,7 +298,8 @@
             </label>
 
             <!-- Dropdown options -->
-            <select name="review_rating" id="review_rating">
+            <select name="review_rating" id="review_rating" required>
+                <option value="">Please select a number</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>

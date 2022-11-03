@@ -1,3 +1,4 @@
+from datetime import datetime
 from flask import Blueprint, render_template, request, flash, redirect, url_for, session
 from .models import User, Review, Manager
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -14,16 +15,22 @@ def survey():
         email = request.form.get('email')
         first_Name = request.form.get('first_Name')
         
+        # checks to see if email already exsits if so it'll store it and continue to questions.
         exsiting_Email = User.query.filter_by(email=email).first()
         if exsiting_Email:
             
             # creating a session so the info can be accessed in other pages
             session['User_email'] = email
             
+            # redirects to questions html
             return redirect(url_for('views.question'))
-        elif len(email) < 4:
-            flash('Email must be greater than 3 characters', category='error')
+        elif len(email) < 4: # checking to see if email is greater than 3 characters
+            flash('Email must be greater than 3 characters', 'error')
+            return render_template("user.html")
         else:
+            # creating a session so the info can be accessed in other pages
+            session['User_email'] = email
+            
             # creating a query to input the info into the database
             new_user = User(email=email, first_Name=first_Name)
             
@@ -39,13 +46,14 @@ def survey():
     
 @auth.route('/question', methods=['GET','POST'])
 def question():
+    today_date = datetime.now()
     if request.method == 'POST':
         if 'User_email' in session:
             
             # info requested from questions.html
-            date = request.form.get('date')
+            date = datetime.strptime(request.form.get('date'), '%Y-%m-%d')
             gender = request.form.get('gender')
-            golf_Course = request.form.get('selection')
+            golf_Course = request.form.get('golf_course')
             golf_Rating = request.form.get('golf_rating')
             visit = request.form.get('visit')
             golf_ball = request.form.get('Gball')
@@ -56,18 +64,21 @@ def question():
             # retreving the user info from previous page
             user_Email = session['User_email']
             
-            # Creating the query for the Review table
-            new_Review = Review(add_Feedback=add_Feedback, date=date, user_Email=user_Email, gender=gender, golf_Course=golf_Course, rating=golf_Rating, visits=visit, type_Golfball=golf_ball, club_Brand=club, review_Rate=review_Rate)
-            
-            # Adding query to the database
-            db.session.add(new_Review)
-            db.session.commit()
-            
-            # flashing a message that review was successfully submited
-            flash('Review was Successfully Submited')
-            
-            # redirecting the user to a thank you page 
-            return redirect(url_for('views.ty'))
+            if date > today_date:
+                flash('Are you a time traveler?', 'error')
+            else:
+                # Creating the query for the Review table
+                new_Review = Review(add_Feedback=add_Feedback, date=date, user_Email=user_Email, gender=gender, golf_Course=golf_Course, rating=golf_Rating, visits=visit, type_Golfball=golf_ball, club_Brand=club, review_Rate=review_Rate)
+                
+                # Adding query to the database
+                db.session.add(new_Review)
+                db.session.commit()
+                
+                # flashing a message that review was successfully submited
+                flash('Review was Successfully Submited')
+                
+                # redirecting the user to a thank you page 
+                return redirect(url_for('views.ty'))
         return render_template("questions.html")
     return render_template("questions.html")    
 
