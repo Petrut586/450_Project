@@ -16,7 +16,7 @@
     />
     
 
-    <title>{% block title %}Golf Review!{% endblock %}</title>
+    <title>{% block title %}Home{% endblock %}</title>
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -41,27 +41,25 @@
     </nav>
     <!-- flashes messages on the screen -->
     {% with messages = get_flashed_messages(with_categories=true) %}
-    {% if messages %}
-      {% for category, messages in messages%}
-      {% if category == 'error'%}
-      <div class="alert alert-danger alter-dismissable fade show" role="alert">
-        {{ message }}
-        <!-- this is a fancy bootstrap button -->
-        <button type="button" class="close" data-dismiss="alert">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      {% else %}
-      <div class="alert alert-success alter-dismissable fade show" role="alert">
-        {{ message }}
-        <!-- this is a fancy bootstrap button -->
-        <button type="button" class="close" data-dismiss="alert">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
+      {% if messages %}
+        {% for category, messages in messages%}
+          {% if category == 'error'%}
+          <div class="alert alert-danger alter-dismissable fade show" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          {% else %}
+          <div class="alert alert-success alter-dismissable fade show" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          {% endif %}
+        {% endfor %}
       {% endif %}
-      {% endfor %}
-    {% endif %}
     {% endwith %}
     <div class="container">
     {% block content %}{% endblock %}
