@@ -132,6 +132,7 @@ def login():
             flash('Email does not exist', category='error')
     return render_template("managementLogin.html")
 
+<<<<<<< HEAD
 @auth.route('/ownerssearch', methods=['GET','POST'], defaults={"page": 1})
 @auth.route('/ownerssearch<int:page>', methods=['GET', 'POST'])
 def search(page):
@@ -144,3 +145,17 @@ def search(page):
        search = "%{}%".format(tag)
        return render_template('ownerssearch.html', reviews = reviews, tag=tag)
     return render_template("ownerssearch.html", reveiws = reviews)
+=======
+@auth.route('/reviews')
+def review():
+    return render_template("reviews.html")
+
+@auth.route('/search')
+def search():
+    return render_template("search.html")
+
+@auth.route('/avgrating')
+def avgrating():
+    return render_template("averagerating.html")
+
+>>>>>>> faa8fc213e46ae3941e4bab615a76b61e4f2da0e

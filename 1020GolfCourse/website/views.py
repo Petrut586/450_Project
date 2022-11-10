@@ -32,6 +32,21 @@ def question():
 def owner():
     return render_template("owner.html")
 
+<<<<<<< HEAD
 # @views.route('/ownersearch')
 # def ownersearch():
 #     return render_template("ownerssearch.html", reveiws)
+=======
+@views.route('/reviews')
+def reviews():
+    return render_template("reviews.html")
+
+@views.route('/search')
+def search():
+    return render_template("search.html")
+
+@views.route('/avgrating')
+def avgrating():
+    return render_template("averagerating.html")
+    
+>>>>>>> faa8fc213e46ae3941e4bab615a76b61e4f2da0e
