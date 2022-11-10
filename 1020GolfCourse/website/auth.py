@@ -132,4 +132,15 @@ def login():
             flash('Email does not exist', category='error')
     return render_template("managementLogin.html")
 
+@auth.route('/reviews')
+def review():
+    return render_template("reviews.html")
+
+@auth.route('/search')
+def search():
+    return render_template("search.html")
+
+@auth.route('/avgrating')
+def avgrating():
+    return render_template("averagerating.html")
 
