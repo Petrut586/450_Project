@@ -32,3 +32,6 @@ def question():
 def owner():
     return render_template("owner.html")
 
+# @views.route('/ownersearch')
+# def ownersearch():
+#     return render_template("ownerssearch.html", reveiws)

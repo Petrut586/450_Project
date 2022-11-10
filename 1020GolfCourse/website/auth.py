@@ -132,4 +132,15 @@ def login():
             flash('Email does not exist', category='error')
     return render_template("managementLogin.html")
 
-
+@auth.route('/ownerssearch', methods=['GET','POST'], defaults={"page": 1})
+@auth.route('/ownerssearch<int:page>', methods=['GET', 'POST'])
+def search(page):
+    page = page
+    pages = 10
+    
+    reviews = Review.query.order_by(Review.id.asc())  #desc()
+    if request.method == 'POST' and 'tag' in request.form:
+       tag = request.form["tag"]
+       search = "%{}%".format(tag)
+       return render_template('ownerssearch.html', reviews = reviews, tag=tag)
+    return render_template("ownerssearch.html", reveiws = reviews)
