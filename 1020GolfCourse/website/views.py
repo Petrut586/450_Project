@@ -40,7 +40,7 @@ def reviews():
 # def search():
 #     return render_template("search.html")
 
-@views.route('/avgrating')
-def avgrating():
-    return render_template("averagerating.html")
+# @views.route('/avgrating')
+# def avgrating():
+#     return render_template("averagerating.html")
     

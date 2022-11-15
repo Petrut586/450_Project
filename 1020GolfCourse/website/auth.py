@@ -145,5 +145,7 @@ def search():
 
 @auth.route('/avgrating')
 def avgrating():
-    return render_template("averagerating.html")
+    # pulling data from database and sending it through render_template
+    reviews = Review.query.filter().all()
+    return render_template("averagerating.html", reviews=reviews)
 
