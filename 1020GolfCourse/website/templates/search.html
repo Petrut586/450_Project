@@ -29,7 +29,7 @@
                 </tr>
             </thead>
             <tbody>
-        {% for review in reviews %}
+        {% for review in reviews %}<!-- this is reciving the info from auth.py and going through a loop for each row -->
                 <tr>                
                     <td>{{ review.user_Email}}</td>
                     <td>{{ review.rating}}</td>
