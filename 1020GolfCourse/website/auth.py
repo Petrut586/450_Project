@@ -132,30 +132,18 @@ def login():
             flash('Email does not exist', category='error')
     return render_template("managementLogin.html")
 
-<<<<<<< HEAD
-@auth.route('/ownerssearch', methods=['GET','POST'], defaults={"page": 1})
-@auth.route('/ownerssearch<int:page>', methods=['GET', 'POST'])
-def search(page):
-    page = page
-    pages = 10
-    
-    reviews = Review.query.order_by(Review.id.asc())  #desc()
-    if request.method == 'POST' and 'tag' in request.form:
-       tag = request.form["tag"]
-       search = "%{}%".format(tag)
-       return render_template('ownerssearch.html', reviews = reviews, tag=tag)
-    return render_template("ownerssearch.html", reveiws = reviews)
-=======
 @auth.route('/reviews')
 def review():
     return render_template("reviews.html")
 
-@auth.route('/search')
+@auth.route('/search', methods=['GET', 'POST'])
 def search():
-    return render_template("search.html")
+    # creating a variable to get the search parameters selected from the search screen
+    reviews = Review.query.filter().all()
+        
+    return render_template("search.html", reviews=reviews)
 
 @auth.route('/avgrating')
 def avgrating():
     return render_template("averagerating.html")
 
->>>>>>> faa8fc213e46ae3941e4bab615a76b61e4f2da0e
