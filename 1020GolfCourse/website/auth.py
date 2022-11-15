@@ -138,7 +138,7 @@ def review():
 
 @auth.route('/search', methods=['GET', 'POST'])
 def search():
-    # creating a variable to get the search parameters selected from the search screen
+    # pulling all the data from the database and sending it through the render_template
     reviews = Review.query.filter().all()
         
     return render_template("search.html", reviews=reviews)
