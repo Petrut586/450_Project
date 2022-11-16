@@ -16,6 +16,18 @@
     </head>
     <body>
         <h1> Review Table </h1>
+        <table id="checkbox filters" class="table" style="width:100%">
+            <tr>
+                <th><input type = "checkbox" name="filters" value="user_Email"> Email</input></th>
+                <th><input type = "checkbox" name="filters" value="rating"> Rating</input></th>
+                <th><input type = "checkbox" name="filters" value="date"> Date Played</input></th>
+                <th><input type = "checkbox" name="filters" value="gender"> Gender</input></th>
+                <th><input type = "checkbox" name="filters" value="visits"> Visits</input></th>
+                <th><input type = "checkbox" name="filters" value="type_Golfball"> Type of Golfballs</input></th>
+                <th><input type = "checkbox" name="filters" value="club_Brand"> Club Brand</input></th>
+                <th><input type = "checkbox" name="filters" value="add_Feedback"> Comments</input></th>
+            </tr>
+        </table>
         <table id="review_Table" class="table table-striped table-bordered" style="width:100%">
             <thead>
                 <tr>
@@ -26,6 +38,7 @@
                     <th>Visits</th>
                     <th>Type of Golfballs</th>
                     <th>Type of Clubs</th>
+                    <th>Comments</th>
                 </tr>
             </thead>
             <tbody>
@@ -38,6 +51,7 @@
                     <td>{{ review.visits}}</td>
                     <td>{{ review.type_Golfball}}</td>
                     <td>{{ review.club_Brand}}</td>
+                    <td>{{ review.add_Feedback}}</td>
                 </tr>
         {% endfor %}
             </tbody>
@@ -50,6 +64,7 @@
                     <th>Visits</th>
                     <th>Type of Golfballs</th>
                     <th>Type of Clubs</th>
+                    <th>Comments</th>
                 </tr>
             </tfoot>
         </table>

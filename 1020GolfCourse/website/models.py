@@ -12,7 +12,7 @@ class Manager(db.Model, UserMixin):
 class Review(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     add_Feedback = db.Column(db.String(10000))
-    date = db.Column(db.String(30))
+    date = db.Column(db.Date)
     user_Email = db.Column(db.Integer, db.ForeignKey('user.email'))
     gender = db.Column(db.String(20))
     golf_Course = db.Column(db.String(50), db.ForeignKey('manager.golf_Course'))
