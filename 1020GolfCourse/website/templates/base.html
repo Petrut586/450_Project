@@ -42,6 +42,7 @@
     </ul>  
     </nav>
     <!-- flashes messages on the screen -->
+    <div class="container" style="min-height:200% width:100%">
     {% with messages = get_flashed_messages(with_categories=true) %}
       {% if messages %}
         {% for category, messages in messages%}
