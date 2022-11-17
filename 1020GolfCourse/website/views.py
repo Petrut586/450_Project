@@ -32,9 +32,9 @@ def question():
 def owner():
     return render_template("owner.html")
 
-@views.route('/reviews')
-def reviews():
-    return render_template("reviews.html")
+# @views.route('/reviews')
+# def reviews():
+#     return render_template("reviews.html")
 
 # @views.route('/search')
 # def search():

@@ -4,6 +4,7 @@ from .models import User, Review, Manager
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import db 
 from flask_login import login_user, login_required, logout_user, current_user
+from sqlalchemy.sql import func
 
 auth = Blueprint('auth', __name__)
 
@@ -120,7 +121,7 @@ def login():
     if request.method == 'POST':
         email = request.form.get('email') 
         password = request.form.get('password')
-
+        session['Manager_email'] = email
         manager = Manager.query.filter_by(email=email).first()
         if manager:
             if check_password_hash(manager.password, password):
@@ -132,20 +133,33 @@ def login():
             flash('Email does not exist', category='error')
     return render_template("managementLogin.html")
 
-@auth.route('/reviews')
+@auth.route('/reviews', methods=['GET', 'POST'])
 def review():
-    return render_template("reviews.html")
+    if 'Manager_email' in session:
+        # pulling data from database and sending it through render_template
+        reviews = Review.query.filter().all()
+        manager = session['Manager_email']
+        first_Name = Manager.query.filter_by(email=manager).first()
+    return render_template("reviews.html", reviews=reviews, first_Name=first_Name)
 
 @auth.route('/search', methods=['GET', 'POST'])
 def search():
-    # pulling all the data from the database and sending it through the render_template
-    reviews = Review.query.filter().all()
+    if 'Manager_email' in session:
+        # pulling data from database and sending it through render_template
+        reviews = Review.query.filter().all()
+        manager = session['Manager_email']
+        first_Name = Manager.query.filter_by(email=manager).first()
+   
         
-    return render_template("search.html", reviews=reviews)
+    return render_template("search.html", reviews=reviews, first_Name=first_Name)
 
 @auth.route('/avgrating')
 def avgrating():
-    # pulling data from database and sending it through render_template
-    reviews = Review.query.filter().all()
-    return render_template("averagerating.html", reviews=reviews)
+    if 'Manager_email' in session:
+        # pulling data from database and sending it through render_template
+        reviews = Review.query.filter().all()
+        manager = session['Manager_email']
+        first_Name = Manager.query.filter_by(email=manager).first()
+        avgReviews = Review.query.with_entities(func.avg(Review.rating)).filter(reviews == reviews).all()
+    return render_template("averagerating.html", reviews=reviews, avgReviews=avgReviews,first_Name=first_Name)
 

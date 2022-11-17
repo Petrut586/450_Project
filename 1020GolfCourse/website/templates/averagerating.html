@@ -17,20 +17,22 @@
     <body>
     <style>
         h1,h2, table {
-            text-align: center;
-            
+            text-align: center;     
           } 
-
         .center {
             margin-left: auto;
             margin-right: auto;
         }
-
+        h4{
+            text-align: left;
+        }
     </style>
 
-        
+
+        <h4>Manager: {{first_Name.first_Name}}</h4>
+        <h4>Golf Course: {{first_Name.golf_Course}}</h4>
         <h1> Average Review Table </h1>
-        <h2> Average: </h2>
+        <h2> Average: {{ avgReviews}} out of 10 </h2> 
         <table id="review_Table" class="center table table-striped table-bordered" style="width:50%">
             <thead>
                 <tr>
