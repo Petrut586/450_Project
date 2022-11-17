@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template
+from flask_login import login_required, current_user
 
 
 views = Blueprint('views', __name__)
@@ -28,9 +29,10 @@ def ty():
 def question():
     return render_template("questions.html")
 
-@views.route('/owner')
-def owner():
-    return render_template("owner.html")
+# @views.route('/owner')
+# @login_required
+# def owner():
+#     return render_template("owner.html")
 
 # @views.route('/reviews')
 # def reviews():
