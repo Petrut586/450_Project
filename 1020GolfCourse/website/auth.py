@@ -126,12 +126,27 @@ def login():
         if manager:
             if check_password_hash(manager.password, password):
                 flash('Logged in successfully', category='success')
-                return redirect(url_for('views.owner'))
+                return redirect(url_for('auth.owner'))
             else:
                 flash('Incorrect password', category='error')
         else:
             flash('Email does not exist', category='error')
     return render_template("managementLogin.html")
+
+# @auth.route('/logout')
+# @login_required
+# def logout():
+#     logout_user()
+#     return redirect(url_for('auth.managementlogin'))
+
+@auth.route('/owner', methods=['GET', 'POST'])
+def owner():
+    if 'Manager_email' in session:
+        # pulling data from database and sending it through render_template
+        reviews = Review.query.filter().all()
+        email = session['Manager_email']
+        manager = Manager.query.filter_by(email=email).first()
+    return render_template("owner.html", reviews=reviews, manager=manager)
 
 @auth.route('/reviews', methods=['GET', 'POST'])
 def review():

@@ -18,8 +18,8 @@ body {
 /* Styling the Form (Color, Padding, Shadow) */
 form {
     background-color: #fff;
-    max-width: 500px;
-    margin: 50px auto;
+    max-width: 950px;
+    margin: 60px auto;
     padding: 30px 20px;
     box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.5);
 }
@@ -63,9 +63,9 @@ button {
     margin-right: 20px;
     float: right;
 }
- h4{
+ h4 {
     text-align: left;
-     }
+    }
     
 </style>
 </head>
@@ -76,11 +76,50 @@ button {
 
 <!-- Create Form -->
 <form id="form">
+    <table id="review_Table" class="table table-striped table-bordered" style="width:100%">
+        <thead>
+            <tr>
+                <th>Email</th>
+                <th>Rating</th>
+                <th>Date Played</th>
+                <th>Gender</th>
+                <th>Visits</th>
+                <th>Type of Golfballs</th>
+                <th>Type of Clubs</th>
+                <th>Comments</th>
+            </tr>
+        </thead>
+        <tbody>
+    {% for review in reviews %}<!-- this is reciving the info from auth.py and going through a loop for each row -->
+            <tr>                
+                <td>{{ review.user_Email}}</td>
+                <td>{{ review.rating}}</td>
+                <td>{{ review.date}}</td>
+                <td>{{ review.gender}}</td>
+                <td>{{ review.visits}}</td>
+                <td>{{ review.type_Golfball}}</td>
+                <td>{{ review.club_Brand}}</td>
+                <td>{{ review.add_Feedback}}</td>
+            </tr>
+    {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>Email</th>
+                <th>Rating</th>
+                <th>Date Played</th>
+                <th>Gender</th>
+                <th>Visits</th>
+                <th>Type of Golfballs</th>
+                <th>Type of Clubs</th>
+                <th>Comments</th>
+            </tr>
+        </tfoot>
+    </table>
 
-<!-- Multi-line Text Input Control -->
-<button type="log out" value="log out">
-Log Out
-</button>
+
+
+<a href="/owner" class="btn btn-primary btn-lg, button1" role="button">Back</a>
 
 </form>
 </body>
