@@ -81,12 +81,14 @@ def question():
                 # redirecting the user to a thank you page 
                 return redirect(url_for('views.ty'))
         return render_template("questions.html")
-    return render_template("questions.html")    
+    return render_template("questions.html")   
 
+#returns the home page based on the url
 @auth.route('/home')
 def home():
     return render_template("home.html")
 
+# gets information from signup and checks to see if the manager already has signed up
 @auth.route('/managementsignup', methods=['GET','POST'])
 def signup():
     if request.method == 'POST':
@@ -116,6 +118,7 @@ def signup():
 
     return render_template("management.html")
 
+#checks to see if the user exists in the database and checks password vs the hashed password to confirm signin 
 @auth.route('/managementlogin', methods=['GET','POST'])
 def login():
     if request.method == 'POST':

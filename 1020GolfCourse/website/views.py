@@ -4,6 +4,8 @@ from flask_login import login_required, current_user
 
 views = Blueprint('views', __name__)
 
+# these are all the views of the pages we have. 
+# all of them return an HTML template we have made
 
 @views.route('/')
 def home():

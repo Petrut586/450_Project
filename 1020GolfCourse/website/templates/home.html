@@ -1,23 +1,28 @@
 {% extends "base.html" %} {% block title %}Golf Review{% endblock %}
 
 {% block content %}
+<!-- Homepage for the site to navigate you to the next page -->
 <!DOCTYPE html>
 <html>
 <body>
+<style>
+    h1 {text-align: center;}
+    p1 {text-align: center;}
+    
+</style>
 <br>
 <br>
 <h1>Welcome to the Golf Review Site</h1>
 <br>
-<p>
+<p1>
     Click "Start Survey" to start!
-</p>
+</p1>
 <br>
-<a href="/survey" class="next">Next &raquo;</a>
+<a href="/survey" class="next">Survey &raquo;</a>
 <br>
 
 <image src="{{ url_for('static', filename='images/golferGuy.jpg')}}"
 />    
-
 </body>
 </html>
 {% endblock %}
