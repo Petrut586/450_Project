@@ -164,9 +164,11 @@ def review():
 def search():
     if 'Manager_email' in session:
         # pulling data from database and sending it through render_template
+        
         manager = session['Manager_email']
         first_Name = Manager.query.filter_by(email=manager).first()
-        reviews = Review.query.filter().all()
+        Course = Manager.query.filter_by(golf_Course=first_Name).first()
+        reviews = Review.query.filter_by(golf_Course = Course).all()
         
     return render_template("search.html", reviews=reviews, first_Name=first_Name)
 
@@ -177,9 +179,6 @@ def avgrating():
         reviews = Review.query.filter().all()
         manager = session['Manager_email']
         first_Name = Manager.query.filter_by(email=manager).first()
-        
-        golf_Course = Manager.query.with_entities(Manager.golf_Course).filter_by(email=manager).first()
-        
-        avgReviews = Review.query.with_entities(func.avg(Review.rating)).filter(golf_Course==golf_Course).all()
-    return render_template("averagerating.html", reviews=reviews, avgReviews=avgReviews, first_Name=first_Name, golf_Course=golf_Course)
+        avgReviews = Review.query.with_entities(func.avg(Review.rating)).filter(reviews == reviews).all()
+    return render_template("averagerating.html", reviews=reviews, avgReviews=avgReviews,first_Name=first_Name)
 

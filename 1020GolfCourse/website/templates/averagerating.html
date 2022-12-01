@@ -32,7 +32,7 @@
         <h4>Manager: {{first_Name.first_Name}}</h4>
         <h4>Golf Course: {{first_Name.golf_Course}}</h4>
         <h1> Average Review Table </h1>
-        <h2> Average: {{ avgReviews }}  out of 10 </h2> 
+        <h2> Average: {{ avgReviews}} out of 10 </h2> 
         <table id="review_Table" class="center table table-striped table-bordered" style="width:50%">
             <thead>
                 <tr>
@@ -42,13 +42,12 @@
             </thead>
             <tbody>
             {% for review in reviews %}
-                {% if review.golf_Course == first_Name.golf_Course %}
                 <tr>
-                    <td>{{ review.rating}}</td> <!--need to figure out how to get these assending from best to worst -->
+                     <td>{{ review.rating}}</td> <!--need to figure out how to get these assending from best to worst -->
                     <td>{{ review.date}}</td>
+
                 </tr>
-                {% endif %}
-            {% endfor %}
+                {% endfor %}
             </tbody>
             <tfoot>
                 <tr>
@@ -57,6 +56,5 @@
                 </tr>
             </tfoot>
         </table>
-        
     </body>
 {% endblock %}
