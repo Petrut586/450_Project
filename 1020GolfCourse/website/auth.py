@@ -167,8 +167,8 @@ def search():
         
         manager = session['Manager_email']
         first_Name = Manager.query.filter_by(email=manager).first()
-        Course = Manager.query.filter_by(golf_Course=first_Name).first()
-        reviews = Review.query.filter_by(golf_Course = Course).all()
+        # Course = Manager.query.filter_by(golf_Course=first_Name).first()
+        reviews = Review.query.filter_by().all()
         
     return render_template("search.html", reviews=reviews, first_Name=first_Name)
 
