@@ -23,7 +23,7 @@
         <h4>Manager: {{first_Name.first_Name}}</h4>
         <h4>Golf Course: {{first_Name.golf_Course}}</h4>
         <h1> Review Table </h1>
-        <table id="checkbox filters" class="table" style="width:100%">
+        <!-- <table id="checkbox filters" class="table" style="width:100%">
             <tr>
                 <th><input type = "checkbox" name="filters" value="user_Email"> Email</input></th>
                 <th><input type = "checkbox" name="filters" value="rating"> Rating</input></th>
@@ -35,6 +35,9 @@
                 <th><input type = "checkbox" name="filters" value="add_Feedback"> Comments</input></th>
             </tr>
         </table>
+        <button type="submit" class="btn btn-primary"> Search </button> -->
+        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for..">
+
         <table id="review_Table" class="table table-striped table-bordered" style="width:100%">
             <thead>
                 <tr>
@@ -50,6 +53,7 @@
             </thead>
             <tbody>
         {% for review in reviews %}<!-- this is reciving the info from auth.py and going through a loop for each row -->
+            {% if review.golf_Course == first_Name.golf_Course %}
                 <tr>                
                     <td>{{ review.user_Email}}</td>
                     <td>{{ review.rating}}</td>
@@ -60,6 +64,7 @@
                     <td>{{ review.club_Brand}}</td>
                     <td>{{ review.add_Feedback}}</td>
                 </tr>
+            {% endif %}
         {% endfor %}
             </tbody>
             <tfoot>
@@ -75,6 +80,26 @@
                 </tr>
             </tfoot>
         </table>
+            <script>
+            function myFunction() {
+                var input, filter, table, tr, td, i, txtValue;
+                input = document.getElementById("myInput");
+                filter = input.value.toUpperCase();
+                table = document.getElementById("review_Table");
+                tr = table.getElementsByTagName("tr");
+                for (i = 0; i < tr.length; i++) {
+                    td = tr[i].getElementsByTagName("td")[0];
+                    if (td) {
+                        txtValue = td.textContent || td.innerText;
+                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                            tr[i].style.display = "";
+                        } else {
+                            tr[i].style.display = "none";
+                        }
+                    }       
+                }
+            }
+            </script>
     </body>
 
 {% endblock %}

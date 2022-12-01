@@ -18,7 +18,7 @@ body {
 /* Styling the Form (Color, Padding, Shadow) */
 form {
     background-color: #fff;
-    max-width: 950px;
+    max-width: 1500px;
     margin: 60px auto;
     padding: 30px 20px;
     box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.5);
@@ -46,7 +46,7 @@ select, textarea */
     font-family: inherit;
     padding: 10px;
     display: block;
-    width: 95%;
+    width: 100%;
 }
 
 
@@ -91,6 +91,7 @@ button {
         </thead>
         <tbody>
     {% for review in reviews %}<!-- this is reciving the info from auth.py and going through a loop for each row -->
+            {% if review.golf_Course == first_Name.golf_Course %}
             <tr>                
                 <td>{{ review.user_Email}}</td>
                 <td>{{ review.rating}}</td>
@@ -101,6 +102,7 @@ button {
                 <td>{{ review.club_Brand}}</td>
                 <td>{{ review.add_Feedback}}</td>
             </tr>
+            {% endif %}
     {% endfor %}
         </tbody>
         <tfoot>
